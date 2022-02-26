@@ -1,0 +1,23 @@
+//@version=3
+study("Weekly/Monthly Close", overlay=true)
+
+// inputs
+week_history = input(title="Weekly history", type=bool, defval=false)
+week_tracking = input(title="Last week tracking", type=bool, defval=true)
+month_history = input(title="Monthly history", type=bool, defval=false)
+month_tracking = input(title="Last month tracking", type=bool, defval=true)
+
+// monthly close
+month_close = valuewhen((month_history or month_tracking) and barstate.ishistory, security(tickerid, 'M', close), 0)
+plot(month_close, title='Month', color=color(blue, 60), style=stepline, linewidth=3, trackprice=month_tracking, offset=(month_history ? 0 : -9999))
+
+// weekly close
+week_close = valuewhen((week_history or week_tracking) and barstate.ishistory and not(ismonthly), security(tickerid, 'W', close), 0)
+plot(week_close, title='Week', color=color(blue, 50), style=stepline, linewidth=2, trackprice=week_tracking, offset=(week_history ? 0 : -9999))
+
+// last segment only
+// week_close = security(tickerid, 'W', close)
+// month_close = security(tickerid, 'M', close)
+// last_week_close = barstate.ishistory and weekofyear(timenow) == weekofyear ? week_close : na
+// last_month_close = barstate.ishistory and month(timenow) == month ? month_close : na //valuewhen(barstate.ishistory, month_close, 0)
+
