@@ -1,8 +1,8 @@
 from pyupbit import WebSocketManager
 import pyupbit
 #로그인
-access = "JG5PmRwtSp3emHMesXoVqRI5FoVIH6vGripDWbdE"          # 본인 값으로 변경
-secret = "CnMdUobIlQxhfeKGaeEfRGKYjRmBcxHWlxuqsKi7"          # 본인 값으로 변경
+access = ""          # 본인 값으로 변경
+secret = ""          # 본인 값으로 변경
 upbit = pyupbit.Upbit(access, secret)
 
 #잔고조회
